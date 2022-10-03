@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        .title{
+            text-align: center;
+            font-family: fantasy;
+            color: blueviolet;
+        }
+        #mesWrap{
+            width: 500px;
+            height: 550px;
+            background: blueviolet;
+            border-radius: 20px;
+        }
+        div.message{
+            background: white;
+            padding-right: 20px;
+            height: 40px;
+            margin-top: 30px;
+            margin-left: 30px;
+            display: inline-block;
+            border-radius: 10px;
+            border-bottom-left-radius: 0px;
+        }
+        span.message{
+            font-family: fantasy;
+            color: blueviolet;
+            display: inline-block;
+            margin-top: 10px;
+            margin-left: 20px;
+            font-size: 20px;
+        }
+        #sendWrap{
+            width: 500px;
+            margin-top: -40px;
+            margin-left: 10px;
+
+        }
+        #sendWrap input{
+            width: 418px;
+            height: 18px;
+            border-radius: 20px;
+            border: none;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            padding: 6px;
+            color: blueviolet;
+            outline: none;
+        }
+        #sendWrap button{
+            height: 30px;
+            border-radius: 20px;
+            border: none;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+            background: #fff;
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Chat App</h1>
+    <div id="mesWrap">
+        <!-- <div class="message">
+            <span class="message">Hi!</span>
+        </div>
+        <div class="message">
+            <span class="message">Hi!</span>
+        </div> -->
+    </div>
+    <div id="sendWrap">
+      <input type="text" id="EntryTXT" value="">
+      <button onclick="send()">Send!</button>
+    </div>
+</body>
+<script>
+    const socket = io();
+
+    socket.on("message", message =>{
+        console.log(message);
+        var div = document.createElement('div');
+        var br = document.createElement('br');
+        div.className = "message";
+        div.innerHTML = `<span class="message">${message}</span>`;
+        document.getElementById('mesWrap').appendChild(div);
+        document.getElementById('mesWrap').append(br);
+    })
+
+    function send(){
+        var message = document.getElementById("EntryTXT").value;
+        console.log(message);
+        socket.emit("Chatmessage", message);
+    }
+</script>
+</html>

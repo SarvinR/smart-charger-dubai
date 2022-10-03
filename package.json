@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "express": "^4.18.1",
+    "socket.io": "^4.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "name": "first-web-communication",
+  "version": "1.0.0",
+  "description": "Testing Web Communication",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app",
+    "dev": "nodemon app"
+  },
+  "author": "Sarvin R",
+  "license": "ISC"
+}
